@@ -10,7 +10,8 @@ function AppRoutes() {
   return (
     <Routes>
       {routes.map((route) => {
-        const Layout = route.layout === undefined ? DefaultLayout : route.layout || NoLayout;
+        const Layout =
+          route.layout === undefined ? DefaultLayout : route.layout || NoLayout;
         const Component = route.component;
         const RouteElement = route.protected ? ProtectedRoute : Fragment;
 
