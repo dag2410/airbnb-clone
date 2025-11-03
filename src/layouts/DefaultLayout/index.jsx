@@ -5,8 +5,8 @@ import Footer from "./components/Footer";
 function DefaultLayout() {
   return (
     <div>
-      <Header />
-      <main>
+      <Header type="main" />
+      <main className="max-w-screen-2xl mx-auto px-5">
         <Outlet />
       </main>
       <Footer />
