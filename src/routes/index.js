@@ -14,7 +14,7 @@ import Experiences from "@/pages/Experiences";
 import Services from "@/pages/Services";
 import RoomDetail from "@/pages/RoomDetail";
 import StaySearch from "@/pages/StaySearch";
-import Wishlists from "@/pages/wishlists";
+import Wishlists from "@/pages/Wishlists";
 import SecondaryLayout from "@/layouts/SecondaryLayout";
 import EditProfile from "@/pages/EditProfile";
 
