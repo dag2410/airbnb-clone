@@ -1,91 +1,75 @@
-import logo from "@/assets/images/logo.png";
-import LoginButton from "@/auth/LoginButton";
-import LogoutButton from "@/auth/LogoutButton";
-import RegisterButton from "@/auth/RegisterButton";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import styles from "./Header.module.scss";
-import SearchBar from "./SearchBar/index";
-import UserNavigation from "./UserNavigation/index";
-// import { Tabs, Tab } from "@/components/Tabs";
+import logo from "@/assets/images/logo.svg";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import Navbar from "./NavBar";
+import SubNavbar from "./SubNavbar";
+import UserNavigation from "./UserNavigation";
+import "./header.css";
 
-const Header = () => {
-  const currentUser = useSelector((state) => state.auth.currentUser);
+const Header = ({ type }) => {
+  const [isScroll, setIsScroll] = useState(false);
 
-  const token = localStorage.getItem("token");
-  const [isLogged, setIsLogged] = useState(true);
   useEffect(() => {
-    if (token) {
-      setIsLogged(false);
-    }
-  }, [token]);
-  const ul = React.createElement(
-    "ul",
-    { className: "course-item" },
-    React.createElement(
-      "li",
-      {
-        className: "course-item",
-      },
-      React.createElement("a", { href: "/courses/1" }, "HTML,Css")
-    ),
-    React.createElement(
-      "li",
-      {
-        className: "course-item",
-      },
-      React.createElement("a", { href: "/courses/2" }, "Js")
-    ),
-    React.createElement(
-      "li",
-      {
-        className: "course-item",
-      },
-      React.createElement("a", { href: "/courses/3" }, "Nodejs")
-    )
-  );
-  // console.log(ul);
+    const handleScroll = () => setIsScroll(window.scrollY > 100);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // const courses = [
-  //   { id: 1, name: "Html,css" },
-  //   { id: 2, name: "Html,css" },
-  //   { id: 3, name: "Html,css" },
-  // ];
-
-  // courses.map((c) => {
-  //   React.createElement("li", { className: "course-item" }, React.createElement("a", { href: `/courses/${c.id}` }, `${c.name}`));
-  // });
-  // console.log(courses);
-
-  // const cou = createElement(
-  //   "ul",
-  //   { className: "courses" },
-  //   courses.map((c) => {
-  //     React.createElement("li", { key: c.id, className: "course-item" }, React.createElement("a", { href: `/courses/${c.id}` }, `${c.name}`));
-  //   })
-  // );
-  return (
-    <header className={`${styles.headerMain} bg-white shadow-sm p-4 ps-5 pe-5`}>
-      <div className="d-flex justify-content-between align-items-center">
-        <NavLink to="/">
-          <img src={logo} alt="Logo" width="100" />
-        </NavLink>
-        <SearchBar />
-
-        {isLogged ? (
-          <div className="d-flex gap-3">
-            <LoginButton />
-            <RegisterButton />
+  if (type === "sub") {
+    return (
+      <header className="sticky w-full bg-[#f7f7f7] px-10 pt-5 pb-4 z-30 border-b-2">
+        <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
+          <div className="w-[210px]  self-start">
+            <NavLink to="/">
+              <img src={logo} alt="Logo" className="px-8 py-2" />
+            </NavLink>
           </div>
-        ) : (
-          <div className="d-flex align-items-center gap-3">
+          <div className="self-start">
+            <div
+              className={`transition-all duration-700 fade-in
+              `}
+            >
+              <SubNavbar />
+            </div>
+          </div>
+
+          <div className="self-start flex-shrink-0">
             <UserNavigation />
-            <LogoutButton />
           </div>
-        )}
+        </div>
+      </header>
+    );
+  }
+
+  return (
+    <header className="fixed top-0 left-0 w-full bg-[#f7f7f7] px-10 pt-5 pb-4 z-30">
+      <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
+        <div className="w-[210px] self-start">
+          <NavLink to="/">
+            <img src={logo} alt="Logo" className="px-8 py-2" />
+          </NavLink>
+        </div>
+
+        <div className="self-start">
+          <div
+            className={`transition-all duration-700 ${
+              isScroll ? "hidden fade-out" : "block fade-in"
+            }`}
+          >
+            <Navbar />
+          </div>
+          <div
+            className={`transition-all duration-700  ${
+              isScroll ? "block fade-in" : "hidden fade-out"
+            }`}
+          >
+            <SubNavbar />
+          </div>
+        </div>
+        <div className="self-start flex-shrink-0">
+          <UserNavigation />
+        </div>
       </div>
-      {currentUser && <p>hi {currentUser?.lastName}</p>}
     </header>
   );
 };
