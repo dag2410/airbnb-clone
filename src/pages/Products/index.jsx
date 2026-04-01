@@ -2,16 +2,15 @@ import config from "@/config";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loading from "@/components/Loading";
-import { getAll } from "@/features/product/productAsync";
 import { useDispatch, useSelector } from "react-redux";
 
 function Products() {
   const dispatch = useDispatch();
 
   const { products, isLoading, error } = useSelector((state) => state.products);
-  useEffect(() => {
-    dispatch(getAll());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAll());
+  // }, [dispatch]);
 
   if (isLoading) return <Loading />;
   if (error) return <p>Không thể tải thể dữ liệu</p>;

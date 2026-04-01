@@ -31,7 +31,7 @@ const GuestItem = ({
         <Button
           variant="outline"
           size="icon"
-          disabled={type === "adults" ? value === 1 : value === 0}
+          disabled={value === 0}
           onClick={onDecrement}
           className="rounded-full w-8 h-8"
         >

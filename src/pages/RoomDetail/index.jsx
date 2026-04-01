@@ -15,6 +15,7 @@ import SubHeader from "./component/SubHeader";
 const mockRoom = {
   id: "bordeaux-getaway-001",
   title: "Thành Công Ba Đình",
+  slug: "thanh-cong-ba-dinh",
   location: {
     ward: "Thành Công",
     city: "Hà Nội",
@@ -26,8 +27,8 @@ const mockRoom = {
   reviewCount: 7,
   isSuperhost: true,
   host: {
-    id: "host_001",
-    name: "Uyên",
+    id: "001",
+    name: "hải ghazal",
     avatar: "https://i.pravatar.cc/100?img=12",
     isSuperhost: true,
     isVerified: true,
@@ -102,6 +103,9 @@ const mockRoom = {
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", // Living room
     "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Kitchen
     "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bedroom
+    "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bathroom
+    "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bathroom
+    "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bathroom
     "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bathroom
     "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80", // Bathroom
   ],
@@ -262,13 +266,20 @@ const RoomDetail = () => {
 
           {/*  Booking Card*/}
           <div className="w-4/12 mt-10 scroll-m-28" ref={bookingRef}>
-            <BookingCard pricePerNight={mockRoom.pricePerNight} />
+            <BookingCard
+              pricePerNight={mockRoom.pricePerNight}
+              room={mockRoom}
+            />
           </div>
         </section>
 
         {/* Rating & Comment list */}
         <section ref={reviewsRef} className="scroll-m-28 py-10 border-y-2">
-          <RoomReviews reviews={mockRoom.reviews} isExpand={isExpand} />
+          <RoomReviews
+            reviews={mockRoom.reviews}
+            isExpand={isExpand}
+            host={mockRoom?.host}
+          />
         </section>
 
         {/* Map */}
@@ -293,7 +304,7 @@ const RoomDetail = () => {
         </section>
 
         {/* Host information chưa kết hợp mockRoom */}
-        <section className="py-10 border-b-2 scroll-m-16" ref={hostRef}>
+        <section className="py-10 border-b-2 scroll-m-16">
           <RoomTips />
         </section>
       </div>

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-gray-100 text-sm text-gray-800 px-20 py-16">
+    <footer className="w-full bg-gray-100 text-sm text-gray-800 px-20 py-16 ">
       {/* Container */}
       <div className="max-w-screen-2xl mx-auto mx-auto space-y-8">
         {/* Footer Links */}

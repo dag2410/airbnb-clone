@@ -5,9 +5,12 @@ import Navbar from "./NavBar";
 import SubNavbar from "./SubNavbar";
 import UserNavigation from "./UserNavigation";
 import "./header.css";
+import HeroSection from "../Hero";
 
 const Header = ({ type }) => {
   const [isScroll, setIsScroll] = useState(false);
+  const location = useLocation();
+  const isCreateRoom = location.pathname == "/host/create-listing";
 
   useEffect(() => {
     const handleScroll = () => setIsScroll(window.scrollY > 100);
@@ -17,14 +20,16 @@ const Header = ({ type }) => {
 
   if (type === "sub") {
     return (
-      <header className="sticky w-full bg-[#f7f7f7] px-10 pt-5 pb-4 z-30 border-b-2">
+      <header
+        className={`sticky w-full bg-white shadow text-black px-10 pt-5 pb-4 z-30 border-b-2`}
+      >
         <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
-          <div className="w-[210px]  self-start">
+          <div className={`${isCreateRoom ? "" : "w-[260px]"}`}>
             <NavLink to="/">
-              <img src={logo} alt="Logo" className="px-8 py-2" />
+              <img src={logo} alt="Logo" className="px-3 py-5" />
             </NavLink>
           </div>
-          <div className="self-start">
+          <div>
             <div
               className={`transition-all duration-700 fade-in
               `}
@@ -33,7 +38,7 @@ const Header = ({ type }) => {
             </div>
           </div>
 
-          <div className="self-start flex-shrink-0">
+          <div className="flex-shrink-0">
             <UserNavigation />
           </div>
         </div>
@@ -42,15 +47,17 @@ const Header = ({ type }) => {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-[#f7f7f7] px-10 pt-5 pb-4 z-30">
+    <header
+      className={`fixed top-0 left-0 w-full bg-white shadow text-black px-10 pt-5 pb-4 z-30`}
+    >
       <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
-        <div className="w-[210px] self-start">
+        <div className="w-[250px]">
           <NavLink to="/">
-            <img src={logo} alt="Logo" className="px-8 py-2" />
+            <img src={logo} alt="Logo" className="px-3 py-5" />
           </NavLink>
         </div>
 
-        <div className="self-start">
+        <div>
           <div
             className={`transition-all duration-700 ${
               isScroll ? "hidden fade-out" : "block fade-in"
@@ -66,7 +73,7 @@ const Header = ({ type }) => {
             <SubNavbar />
           </div>
         </div>
-        <div className="self-start flex-shrink-0">
+        <div className="flex-shrink-0">
           <UserNavigation />
         </div>
       </div>

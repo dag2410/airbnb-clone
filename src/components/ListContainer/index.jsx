@@ -8,7 +8,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
   const [itemWidth, setItemWidth] = useState(0);
 
   const itemsPerView = 7;
-  const maxIndex = Math.max(0, listing.length - itemsPerView);
+  const maxIndex = Math.max(0, listing?.length - itemsPerView);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1));
@@ -60,7 +60,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
                 transform: `translateX(-${currentIndex * itemWidth}px)`,
               }}
             >
-              {listing.map((item) => (
+              {listing?.map((item) => (
                 <div key={item.id} ref={itemRef}>
                   <ListItems data={item} />
                 </div>

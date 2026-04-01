@@ -3,7 +3,7 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const ListItems = ({ data, fav = false }) => {
-  const [isLike, setIsLike] = useState(false);
+  const [isLike, setIsLike] = useState(fav);
 
   return (
     <div className="w-52 relative cursor-pointer transition-transform duration-500 hover:scale-105 select-none">
@@ -30,9 +30,9 @@ const ListItems = ({ data, fav = false }) => {
           className={`
      cursor-pointer w-5 h-5 transition-all duration-300 ease-in-out 
     ${
-      isLike || fav
+      isLike
         ? "text-brandPrimary-1  drop-shadow-[0_0_6px_#F6475F]"
-        : "text-gray-700 hover:drop-shadow-[0_0_6px_#F6475F]"
+        : "text-yellow-200 hover:drop-shadow-[0_0_6px_#F6475F]"
     }
   `}
           onClick={() => setIsLike((prev) => !prev)}
