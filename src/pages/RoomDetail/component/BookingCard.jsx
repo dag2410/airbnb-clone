@@ -5,8 +5,10 @@ import GuestItem from "@/layouts/DefaultLayout/components/Header/SearchBar/popup
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const BookingCard = ({ pricePerNight }) => {
+const BookingCard = ({ pricePerNight, room }) => {
+  const navigate = useNavigate();
   const [activePopupType, setActivePopupType] = useState(null);
   const [date, setDate] = useState({
     from: undefined,
@@ -73,7 +75,7 @@ const BookingCard = ({ pricePerNight }) => {
           className="col-span-1 row-span-1 p-2 border-b border-gray-400 hover:bg-gray-200 transition-colors duration-200"
           onClick={() => togglePopUp("calendar")}
         >
-          <span className="font-semibold ">Trả Phòng</span>
+          <span className="font-semibold">Trả Phòng</span>
           <div>
             {date?.to ? date?.to.toLocaleDateString("vi-VN") : "Thêm ngày"}
           </div>
@@ -170,9 +172,20 @@ const BookingCard = ({ pricePerNight }) => {
         <Button
           variant="default"
           size="lg"
-          className="w-full col-span-2 text-lg rounded-full py-6 bg-brandPrimary-1 hover:bg-rose-700 transition-colors duration-500 ease-in-out  "
+          className={`w-full col-span-2 text-lg rounded-full py-6  
+            transition-colors duration-500 ease-in-out 
+            ${
+              date?.from && date?.to && totalPrice > 0
+                ? "bg-brandPrimary-1 hover:bg-rose-700"
+                : "bg-rose-300 hover:bg-rose-300"
+            }`}
+          onClick={() =>
+            date?.from && date?.to && totalPrice > 0
+              ? navigate(`/checkout/${room.slug}`)
+              : ""
+          }
         >
-          {date?.from && date?.to
+          {date?.from && date?.to && totalPrice > 0
             ? "Đặt phòng"
             : "Kiểm tra tình trạng còn phòng"}
         </Button>

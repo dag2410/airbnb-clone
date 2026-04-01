@@ -1,3 +1,4 @@
+import ReviewList from "@/components/ReviewList";
 import {
   Popover,
   PopoverContent,
@@ -5,8 +6,9 @@ import {
 } from "@/components/ui/popover";
 import React from "react";
 import { FaRegStar } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
-const RoomReviews = ({ reviews, isExpand }) => {
+const RoomReviews = ({ reviews, isExpand, host }) => {
   return (
     <div>
       <div className="flex gap-2 items-center font-semibold font-montserrat text-2xl mt-5">
@@ -23,20 +25,25 @@ const RoomReviews = ({ reviews, isExpand }) => {
       <div className="grid grid-cols-2 mt-10 gap-x-32 gap-y-10">
         {reviews.map((item, index) => (
           <div key={index}>
-            <div className="flex gap-5 items-center">
-              <img
-                src={item.avatar}
-                alt="avatar"
-                className="rounded-full w-16 object-cover"
-              />
-              <div className="flex flex-col">
-                <span className="font-montserrat font-semibold text-xl">
-                  {item.author}
-                </span>
-                <span className="font-montserrat text-sm text-gray-600 ">
-                  {item.location}
-                </span>
-              </div>
+            <div>
+              <NavLink
+                to={`/users/profile/${host.id}`}
+                className="flex gap-5 items-center"
+              >
+                <img
+                  src={item.avatar}
+                  alt="avatar"
+                  className="rounded-full w-16 object-cover"
+                />
+                <div className="flex flex-col">
+                  <span className="font-montserrat font-semibold text-xl">
+                    {item.author}
+                  </span>
+                  <span className="font-montserrat text-sm text-gray-600 ">
+                    {item.location}
+                  </span>
+                </div>
+              </NavLink>
             </div>
             <div className="mt-3">
               <div className="flex items-center gap-2">
@@ -85,6 +92,8 @@ const RoomReviews = ({ reviews, isExpand }) => {
           4 năm qua. Tiêu chí có thể thay đổi.
         </PopoverContent>
       </Popover>
+
+      <ReviewList reviews={reviews} host={host} />
     </div>
   );
 };

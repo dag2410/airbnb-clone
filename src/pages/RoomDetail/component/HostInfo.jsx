@@ -1,34 +1,39 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HostInfo = ({ host }) => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h3 className="font-montserrat font-medium text-2xl">
         Gặp gỡ host của bạn
       </h3>
       <div className="flex mt-10 gap-16">
-        <div className="w-4/12 flex flex-col gap-5">
-          <div className="flex shadow-lg px-12 py-8 gap-5">
+        <div className="w-4/12 flex flex-col gap-5 ">
+          <div className="flex shadow-lg px-12 py-8 gap-5 rounded-2xl">
             <div className="w-3/6 flex flex-col items-center gap-3">
-              <img
-                src={host.avatar}
-                alt="avatar"
-                className="rounded-full object-cover"
-              />
-              <div className="flex flex-col items-center">
-                <span className="font-montserrat text-2xl font-semibold">
-                  {host.name}
-                </span>
-                {host.isSuperhost ? (
-                  <span className="font-montserrat text-sm text-gray-600">
-                    Chủ nhà siêu cấp
+              <NavLink to={`/users/profile/${host.id}`}>
+                <img
+                  src={host.avatar}
+                  alt="avatar"
+                  className="rounded-full object-cover"
+                />
+                <div className="flex flex-col items-center">
+                  <span className="font-montserrat text-2xl font-semibold">
+                    {host.name}
                   </span>
-                ) : (
-                  ""
-                )}
-              </div>
+                  {host.isSuperhost ? (
+                    <span className="font-montserrat text-sm text-gray-600">
+                      Chủ nhà siêu cấp
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </NavLink>
             </div>
             <div className="flex flex-col w-3/6 gap-4">
               <div className="flex flex-col">
@@ -93,6 +98,7 @@ const HostInfo = ({ host }) => {
               variant="ghost"
               size="lg"
               className={`text-lg bg-gray-100 rounded-xl hover:bg-gray-200`}
+              onClick={() => navigate(`/messages`)}
             >
               Nhắn tin cho host
             </Button>

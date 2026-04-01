@@ -10,7 +10,7 @@ const SubHeader = ({ refs }) => {
   ];
 
   return (
-    <div className="fixed px-56 top-0 w-full  py-3 flex gap-6 bg-white shadow-lg">
+    <div className="fixed px-56 top-0 left-0 w-full py-3 flex gap-6 bg-white shadow-lg">
       {sections.map((item, index) => (
         <div
           key={index}

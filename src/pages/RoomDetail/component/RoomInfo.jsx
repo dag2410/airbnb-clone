@@ -1,11 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-const RoomInfo = ({
-  description,
-  roomDetails: { guests, bedrooms, beds, baths },
-  host: { avatar },
-  ref,
-}) => {
+const RoomInfo = forwardRef(({ description, roomDetails, host }, hostRef) => {
+  const { guests, bedrooms, beds, baths } = roomDetails;
+  const { avatar } = host;
+
   return (
     <div className="flex justify-between">
       <div>
@@ -14,10 +12,10 @@ const RoomInfo = ({
         </h2>
         <div className="flex gap-3">
           {[
-            ` ${guests} guests`,
-            `${bedrooms} bedrooms`,
-            `${beds} beds`,
-            `${baths} baths`,
+            `${guests} khách`,
+            `${bedrooms} phòng ngủ`,
+            `${beds} giường`,
+            `${baths} phòng tắm`,
           ].map((item, index, arr) => (
             <div key={index}>
               <span className="text-sm font-montserrat font-medium">
@@ -28,16 +26,19 @@ const RoomInfo = ({
           ))}
         </div>
       </div>
+
       <div>
         <img
           src={avatar}
           alt="avatar host"
           className="rounded-full w-16 object-cover cursor-pointer"
-          onClick={() => ref.current.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => {
+            hostRef?.current?.scrollIntoView({ behavior: "smooth" });
+          }}
         />
       </div>
     </div>
   );
-};
+});
 
 export default RoomInfo;

@@ -1,4 +1,5 @@
-import React from "react";
+import DialogShare from "@/components/DialogShare";
+import React, { useState } from "react";
 import { FaRegStar, FaSave, FaShareSquare } from "react-icons/fa";
 
 const RoomHeader = ({
@@ -7,6 +8,12 @@ const RoomHeader = ({
   reviews,
   location: { city, country, warp },
 }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsDialogOpen(true);
+  };
+
   return (
     <div>
       <h1 className="text-3xl font-montserrat font-semibold ">{title}</h1>
@@ -28,9 +35,12 @@ const RoomHeader = ({
           </div>
         </div>
         <div className="flex gap-5">
-          <button className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg cursor-pointer select-none">
+          <button
+            className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg cursor-pointer select-none"
+            onClick={handleClick}
+          >
             <FaShareSquare className="rounded-full" />
-            <span className="underline underline-offset-1 font-montserrat ">
+            <span className="underline underline-offset-1 font-montserrat">
               Chia sẻ
             </span>
           </button>
@@ -42,6 +52,12 @@ const RoomHeader = ({
           </button>
         </div>
       </div>
+
+      <DialogShare
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        title={"Chia sẻ nơi lưu trú này"}
+      />
     </div>
   );
 };
