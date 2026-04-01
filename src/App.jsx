@@ -10,8 +10,8 @@ function App() {
   return (
     <LoadingProvider>
       <Router>
-        <ScrollTop />
         <UserProvider />
+        <ScrollTop />
         <AppRoutes />
         <ToastContainer />
       </Router>
