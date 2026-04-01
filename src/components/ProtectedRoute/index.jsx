@@ -1,32 +1,52 @@
-import { useEffect } from "react";
-import config from "@/config";
+import DialogForm from "@/components/DialogForm";
+import config from "@/config/authDialog";
 import useUser from "@/hooks/useUser";
-import { useLocation, useNavigate } from "react-router-dom";
-import useLoading from "@/hooks/useLoading";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 
 function ProtectedRoute({ children }) {
-  const location = useLocation();
-  const navigate = useNavigate();
   const user = useUser();
-  const { isLoading, startLoading, stopLoading } = useLoading();
+  const navigate = useNavigate();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [step, setStep] = useState("login");
+  const [redirecting, setRedirecting] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token") || user) {
-      return;
+    if (!user) {
+      setIsDialogOpen(true);
     }
+  }, [user]);
 
-    if (!localStorage.getItem("token") || !user) {
-      const path = encodeURIComponent(location.pathname);
-      navigate(`${config.routes.login}?continue=${path}`);
-    }
-  }, [isLoading, user, location.pathname, navigate]);
+  if (redirecting) {
+    return (
+      <>
+        <Loading />
+        {navigate(-1)}
+      </>
+    );
+  }
 
-  if (isLoading) return <Loading />;
-
-  if (!localStorage.getItem("token") || !user) return null;
+  if (!localStorage.getItem("token") || !user)
+    return (
+      <DialogForm
+        open={isDialogOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setRedirecting(true);
+          }
+          setIsDialogOpen(open);
+        }}
+        {...config[step]}
+        step={step}
+        setStep={setStep}
+        onSuccess={() => {
+          setIsDialogOpen(false);
+        }}
+        isProtected
+      />
+    );
 
   return children;
 }
-
 export default ProtectedRoute;

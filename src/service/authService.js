@@ -1,7 +1,16 @@
 import * as httpRequest from "@/utils/httpRequest";
 
 export const getCurrentUser = async () => {
-  const response = await httpRequest.get("/auth/me");
+  const response = await httpRequest.get("/auth/profile");
+  return response;
+};
+
+export const verifyEmail = async (token) => {
+  const response = await httpRequest.get("/auth/verify-email", {
+    params: {
+      token,
+    },
+  });
   return response;
 };
 
@@ -10,49 +19,51 @@ export const postRegister = async (formData) => {
   return response;
 };
 
-export const postLogOut = async () => {
-  const response = await httpRequest.post("/auth/logout");
-  return response;
-};
-
 export const postLogIn = async (email, password) => {
   const response = await httpRequest.post("/auth/login", { email, password });
   return response;
 };
 
-export const editUser = async (username, formData) => {
-  const response = await httpRequest.put(`/users/${username}`, formData);
+export const postLogOut = async () => {
+  const response = await httpRequest.post("/auth/logout");
+  httpRequest.clearToken();
   return response;
 };
 
-export const checkEmail = async (email, exclude_id) => {
-  const response = await httpRequest.get("/auth/check-email", {
-    params: {
-      email,
-      exclude_id,
-    },
-  });
-  return response.data.exists;
+export const postRefreshToken = async () => {
+  const response = await httpRequest.post("/auth/refresh");
+  return response;
 };
 
-export const checkPhone = async (phone, exclude_id) => {
-  const response = await httpRequest.get("/auth/check-phone", {
-    params: {
-      phone,
-      exclude_id,
-    },
-  });
-  return response.data.exists;
+export const sendForgotPasswordEmail = async (email) => {
+  const response = await httpRequest.post("/auth/forgot-password", email);
+  return response;
 };
 
-export const checkUsername = async (username, exclude_id) => {
-  const response = await httpRequest.get("/auth/check-username", {
+export const verifyResetToken = async (token) => {
+  const response = await httpRequest.get("/auth/reset-password", {
     params: {
-      username,
-      exclude_id,
+      token,
     },
   });
-  return response.data.exists;
+  return response;
+};
+
+export const resetPassword = async (token, password, passwordConfirmation) => {
+  const response = await httpRequest.post(
+    `/auth/reset-password?token=${token}`,
+    {
+      password,
+      passwordConfirmation,
+    },
+  );
+  return response;
+};
+
+export const oauthLogin = async () => {
+  const response =
+    (window.location.href = `${import.meta.env.VITE_BASE_URL}/auth/oauth/google`);
+  return response;
 };
 
 export default {
@@ -60,8 +71,10 @@ export default {
   postRegister,
   postLogOut,
   postLogIn,
-  checkEmail,
-  checkPhone,
-  checkUsername,
-  editUser,
+  postRefreshToken,
+  sendForgotPasswordEmail,
+  verifyResetToken,
+  resetPassword,
+  verifyEmail,
+  oauthLogin,
 };
