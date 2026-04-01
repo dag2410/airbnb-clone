@@ -1,21 +1,35 @@
 import App from "./App.jsx";
+import "./styles/index.css";
 import { persistor, store } from "./store";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { Provider as ReduxProvider } from "react-redux";
-import { LoadingProvider } from "./context/LoadingContext.jsx";
-import { UserProvider } from "./context/UserContext.jsx";
 import { PersistGate } from "redux-persist/integration/react";
-import "./styles/index.css";
+import { LoadingProvider } from "./context/LoadingContext.jsx";
+// import { UserProvider } from "./context/UserContext.jsx";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "./components/ThemeProvider/index.jsx";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <LoadingProvider>
-    <UserProvider>
+    <QueryClientProvider client={queryClient}>
+      {/* <UserProvider> */}
       <ReduxProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <App />
+            <Toaster richColors position="top-right" />
+          </ThemeProvider>
         </PersistGate>
       </ReduxProvider>
-    </UserProvider>
-  </LoadingProvider>
+      {/* </UserProvider> */},
+    </QueryClientProvider>
+  </LoadingProvider>,
 );
