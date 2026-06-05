@@ -1,4 +1,4 @@
-import heroImage from "@/assets/images/cta-image.svg";
+import heroImage from "@/assets/images/cta-image.webp";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 

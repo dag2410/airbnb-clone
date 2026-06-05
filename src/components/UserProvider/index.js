@@ -2,15 +2,12 @@ import { getCurrentUser } from "@/features/auth/authAsync";
 import { logout } from "@/features/auth/authSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function UserProvider() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(getCurrentUser());
-      navigate("/");
     }
   }, [dispatch]);
 

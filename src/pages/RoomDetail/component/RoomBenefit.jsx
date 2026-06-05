@@ -1,6 +1,6 @@
 import React from "react";
 
-import home from "@/assets/images/home.svg";
+import home from "@/assets/images/home.webp";
 
 const RoomBenefit = ({ highlights }) => {
   return (

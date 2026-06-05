@@ -9,7 +9,9 @@ const ListItems = ({ data, fav = false }) => {
     <div className="w-52 relative cursor-pointer transition-transform duration-500 hover:scale-105 select-none">
       <NavLink to={`/rooms/${data.slug}`}>
         <img
-          src={data.image}
+          loading="lazy"
+          decoding="async"
+          src={data?.images[0].url}
           alt={data.title}
           className="w-full h-52 rounded-3xl object-cover object-center z-0"
         />

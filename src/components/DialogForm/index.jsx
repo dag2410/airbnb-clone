@@ -1,4 +1,4 @@
-import Google from "@/assets/images/google.svg";
+import Google from "@/assets/images/google.webp";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -100,7 +100,7 @@ const DialogForm = ({
   const handleSubmitForm = async (values) => {
     try {
       if (step !== "register") {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
       await handler[step]?.(values);
       onSuccess?.();

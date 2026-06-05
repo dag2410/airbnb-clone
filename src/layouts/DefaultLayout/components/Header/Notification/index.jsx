@@ -44,7 +44,7 @@ function Notification() {
 
   const handleMarkAsRead = (id) => {
     setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
     );
   };
 
@@ -78,13 +78,13 @@ function Notification() {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
-          <h3 className="font-semibold text-gray-800">Thông báo</h3>
+          <h3 className="text-lg font-semibold text-gray-800">Thông báo</h3>
           {unreadCount > 0 && (
             <button
-              className="text-xs text-blue-600 hover:underline"
+              className="text-sm text-blue-600 hover:underline"
               onClick={() =>
                 setNotifications((prev) =>
-                  prev.map((n) => ({ ...n, read: true }))
+                  prev.map((n) => ({ ...n, read: true })),
                 )
               }
             >
@@ -114,10 +114,10 @@ function Notification() {
                 }}
               >
                 <div className="w-full flex justify-between items-center">
-                  <span className="font-semibold text-gray-800 text-sm">
+                  <span className="font-semibold text-gray-800 text-base">
                     {n.title}
                   </span>
-                  <span className="text-xs text-gray-500">{n.time}</span>
+                  <span className="text-xs text-gray-600">{n.time}</span>
                 </div>
                 <div className=" w-full flex justify-between items-center">
                   <p className="text-sm text-gray-600">{n.message}</p>

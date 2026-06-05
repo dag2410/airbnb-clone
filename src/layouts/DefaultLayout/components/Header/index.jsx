@@ -1,11 +1,10 @@
-import logo from "@/assets/images/logo.svg";
+import logo from "@/assets/images/logo.webp";
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "./NavBar";
 import SubNavbar from "./SubNavbar";
 import UserNavigation from "./UserNavigation";
 import "./header.css";
-import HeroSection from "../Hero";
 
 const Header = ({ type }) => {
   const [isScroll, setIsScroll] = useState(false);
@@ -26,7 +25,7 @@ const Header = ({ type }) => {
         <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
           <div className={`${isCreateRoom ? "" : "w-[260px]"}`}>
             <NavLink to="/">
-              <img src={logo} alt="Logo" className="px-3 py-5" />
+              <img src={logo} alt="Logo" className="py-5 w-1/2 m-auto" />
             </NavLink>
           </div>
           <div>
@@ -53,7 +52,7 @@ const Header = ({ type }) => {
       <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
         <div className="w-[250px]">
           <NavLink to="/">
-            <img src={logo} alt="Logo" className="px-3 py-5" />
+            <img src={logo} alt="Logo" className="py-5 w-1/2 m-auto" />
           </NavLink>
         </div>
 

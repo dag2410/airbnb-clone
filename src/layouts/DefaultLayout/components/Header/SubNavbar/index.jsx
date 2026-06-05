@@ -1,4 +1,4 @@
-import searchIcon from "@/assets/images/search-btn.svg";
+import searchIcon from "@/assets/images/search-btn.webp";
 import "@/layouts/DefaultLayout/components/Header/header.css";
 import { useEffect, useState } from "react";
 import { FaHome } from "react-icons/fa";

@@ -1,5 +1,5 @@
 import React from "react";
-import chatbotImage from "@/assets/images/chatbot.svg";
+import chatbotImage from "@/assets/images/chatbot.webp";
 
 function Chatbot() {
   return (

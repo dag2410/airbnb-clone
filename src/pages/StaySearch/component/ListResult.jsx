@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import usePagination from "@/hooks/usePagination";
-import filterIcon from "@/assets/images/filter.svg";
+import filterIcon from "@/assets/images/filter.webp";
 import { Button } from "@/components/ui/button";
 import GridContainer from "@/components/GridContainer/GridContainer";
 

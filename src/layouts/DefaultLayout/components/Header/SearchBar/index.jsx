@@ -5,7 +5,7 @@ import SearchField from "./fields/SearchField";
 import CalendarPopup from "./popups/CalendarPopup";
 import LocationPopup from "./popups/LocationPopup";
 import GuestPopup from "./popups/GuestPopup";
-import searchIcon from "@/assets/images/search-btn.svg";
+import searchIcon from "@/assets/images/search-btn.webp";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
