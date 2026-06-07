@@ -32,11 +32,6 @@ const UserMenu = () => {
   const menuItems = currentUser
     ? [
         {
-          icon: <FaRegQuestionCircle />,
-          title: "Trung tâm trợ giúp",
-        },
-
-        {
           icon: <Heart />,
           title: "Danh sách yêu thích",
           handler: () => navigate("/wishlists"),
@@ -53,7 +48,7 @@ const UserMenu = () => {
         },
         {
           icon: <FaGlobe />,
-          title: "Chọn Ngôn Ngữ",
+          title: "Ngôn ngữ",
           handler: () => setIsLangDialogOpen(true),
         },
         {
@@ -64,6 +59,7 @@ const UserMenu = () => {
         {
           icon: <LogOut />,
           title: "Đăng xuất",
+          warning: true,
           handler: async () => {
             await dispatch(postLogOut()).unwrap();
             toast.success("Đăng xuất thành công");
@@ -72,21 +68,13 @@ const UserMenu = () => {
       ]
     : [
         {
-          icon: <FaRegQuestionCircle />,
-          title: "Trung tâm trợ giúp",
-        },
-
-        {
           icon: <FaGlobe />,
-          title: "Chọn Ngôn Ngữ",
+          title: "Ngôn ngữ",
           handler: () => setIsLangDialogOpen(true),
         },
         {
-          title: (
-            <strong className="font-montserrat px-2 text-sm">
-              Đăng nhập hoặc đăng ký
-            </strong>
-          ),
+          icon: <FaUser />,
+          title: "Đăng nhập hoặc đăng ký",
           handler: () => handleOpen("login"),
         },
       ];
@@ -117,7 +105,7 @@ const UserMenu = () => {
           {menuItems.map((item, index) => (
             <DropdownMenuItem
               key={index}
-              className="font-montserrat px-8 py-3 text-sm hover:bg-gray-300 transition-all cursor-pointer"
+              className={`font-montserrat px-8 py-3 text-base font-medium hover:bg-gray-300 transition-all cursor-pointer ${item.warning ? "text-red-600" : ""}`}
               onClick={item.handler}
             >
               {item.icon}
@@ -139,7 +127,7 @@ const UserMenu = () => {
         }}
       />
 
-      {/* Dialog chọn ngôn ngữ */}
+      {/* Dialog Ngôn ngữ */}
       <LangDialog open={isLangDialogOpen} setOpen={setIsLangDialogOpen} />
     </>
   );

@@ -15,7 +15,7 @@ function EditableSection({ label, bio }) {
   return (
     <div>
       <div className="flex flex-col gap-5">
-        <h2 className="font-montserrat text-3xl font-semibold">{label}</h2>
+        <h2 className="font-montserrat text-xl font-semibold">{label}</h2>
         <p className="font-montserrat text-lg">{bio}</p>
       </div>
       <Button

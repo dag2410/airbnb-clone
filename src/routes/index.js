@@ -1,32 +1,29 @@
 import config from "@/config";
-
-import Profile from "@/pages/AboutMe";
-import Home from "@/pages/Home";
-import NotFound from "@/pages/NotFoundPage";
-import Products from "@/pages/Products";
-import Users from "@/pages/UserProfile";
-
-// import LoginPage from "@/auth/LoginPage";
-// import RegisterPage from "@/auth/RegisterPage";
-
 import NoFooterLayout from "@/layouts/NoFooterLayout";
-import SecondaryLayout from "@/layouts/SecondaryLayout";
-import ChatListPage from "@/pages/ChatList";
-import CheckoutPage from "@/pages/Checkout";
-import EditProfile from "@/pages/EditProfile";
-import Experiences from "@/pages/Experiences";
-import RoomDetail from "@/pages/RoomDetail";
-import Services from "@/pages/Services";
-import StaySearch from "@/pages/StaySearch";
-import Wishlists from "@/pages/Wishlists";
-import HostOnboarding from "@/pages/HostOnboarding";
 import NoLayout from "@/layouts/NoLayout";
-import SuccessCreate from "@/pages/SuccessCreate";
-import SuccessBooking from "@/pages/SuccessBooking";
-import Settings from "@/pages/Settings";
-import VerifyEmail from "@/pages/VerifyEmail";
-import ResetPassword from "@/pages/ResetPassword";
-import OauthSuccess from "@/pages/OauthSuccess";
+import SecondaryLayout from "@/layouts/SecondaryLayout";
+import { lazy } from "react";
+
+const Home = lazy(() => import("@/pages/Home"));
+const Users = lazy(() => import("@/pages/UserProfile"));
+const Profile = lazy(() => import("@/pages/AboutMe"));
+const NotFound = lazy(() => import("@/pages/NotFoundPage"));
+
+const ChatListPage = lazy(() => import("@/pages/ChatList"));
+const CheckoutPage = lazy(() => import("@/pages/Checkout"));
+const EditProfile = lazy(() => import("@/pages/EditProfile"));
+const Experiences = lazy(() => import("@/pages/Experiences"));
+const RoomDetail = lazy(() => import("@/pages/RoomDetail"));
+const Services = lazy(() => import("@/pages/Services"));
+const StaySearch = lazy(() => import("@/pages/StaySearch"));
+const Wishlists = lazy(() => import("@/pages/Wishlists"));
+const HostOnboarding = lazy(() => import("@/pages/HostOnboarding"));
+const SuccessCreate = lazy(() => import("@/pages/SuccessCreate"));
+const SuccessBooking = lazy(() => import("@/pages/SuccessBooking"));
+const Settings = lazy(() => import("@/pages/Settings"));
+const VerifyEmail = lazy(() => import("@/pages/VerifyEmail"));
+const ResetPassword = lazy(() => import("@/pages/ResetPassword"));
+const OauthSuccess = lazy(() => import("@/pages/OauthSuccess"));
 // import EditProfile from "@/pages/EditProfile";
 
 const routes = [
@@ -43,11 +40,6 @@ const routes = [
     component: Services,
   },
 
-  {
-    path: config.routes.products,
-    component: Products,
-    layout: NoFooterLayout,
-  },
   {
     path: config.routes.roomDetail,
     component: RoomDetail,
@@ -69,16 +61,6 @@ const routes = [
     component: NotFound,
     layout: null,
   },
-  // {
-  //   path: config.routes.register,
-  //   // component: RegisterPage,
-  //   layout: null,
-  // },
-  // {
-  //   path: config.routes.login,
-  //   component: LoginPage,
-  //   layout: null,
-  // },
   {
     path: config.routes.users,
     component: Users,
@@ -90,20 +72,20 @@ const routes = [
   {
     path: config.routes.profile,
     component: Profile,
-    layout: SecondaryLayout,
+    layout: NoFooterLayout,
     protected: true,
   },
   {
     path: config.routes.pastTrips,
     component: Profile,
-    layout: SecondaryLayout,
+    layout: NoFooterLayout,
 
     protected: true,
   },
   {
     path: config.routes.editProfile,
     component: EditProfile,
-    layout: SecondaryLayout,
+    layout: NoFooterLayout,
 
     protected: true,
   },

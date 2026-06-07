@@ -16,11 +16,12 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
 
   const handleNext = () => {
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };
+  };.0
+     
 
   useEffect(() => {
     if (itemRef.current) {
-      setItemWidth(itemRef.current.offsetWidth + 20);
+      setItemWidth(itemRef.current.offsetWidth);
     }
   }, []);
 
@@ -55,7 +56,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
         <div className="py-3">
           <div className="overflow-x-clip">
             <div
-              className="flex gap-5 transition-transform duration-500 ease-in-out"
+              className="flex gap-1 transition-transform duration-500 ease-in-out"
               style={{
                 transform: `translateX(-${currentIndex * itemWidth}px)`,
               }}

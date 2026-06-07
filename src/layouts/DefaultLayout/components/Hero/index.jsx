@@ -46,7 +46,7 @@ const HeroSection = ({ title, subTitle, heroImage }) => {
               key={index}
               asChild
               variant="ghost"
-              className="px-12 py-8 bg-gray-200 font-sans text-xl text-black transition-all duration-200 hover:bg-rose-500 hover:scale-105 will-change-transform"
+              className="px-12 py-8 bg-gray-200 font-sans text-xl text-black transition-all duration-300 hover:bg-rose-500 hover:scale-105 will-change-transform"
               size="lg"
               onClick={item.onClick}
             >

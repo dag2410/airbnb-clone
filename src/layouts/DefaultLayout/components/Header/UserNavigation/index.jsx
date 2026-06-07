@@ -25,7 +25,7 @@ const UserNavigation = () => {
       {!isCreateRoom && (
         <Button
           variant="ghost"
-          className={`bg-transparent ${baseClasses} font-montserrat font-semibold text-sm text-black`}
+          className={`bg-transparent ${baseClasses} font-montserrat font-semibold text-black`}
           onClick={() => navigate("/host/create-listing")}
         >
           Trở thành host
