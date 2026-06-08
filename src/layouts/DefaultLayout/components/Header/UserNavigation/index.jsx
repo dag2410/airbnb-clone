@@ -12,6 +12,7 @@ const UserNavigation = () => {
   const isCreateRoom = location.pathname == "/host/create-listing";
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const currentUser = useUser();
+  const isHost = currentUser?.role_id === 2;
 
   const baseClasses =
     "hover:bg-gray-200 rounded-full transition-all duration-300 ease-in-out active:scale-95";
@@ -28,7 +29,7 @@ const UserNavigation = () => {
           className={`bg-transparent ${baseClasses} font-montserrat font-semibold text-black`}
           onClick={() => navigate("/host/create-listing")}
         >
-          Trở thành host
+          {isHost ? "Tạo phòng mới" : "Trở thành host"}
         </Button>
       )}
 

@@ -2,9 +2,9 @@
 import ListItems from "@/components/ListItems";
 
 const GridContainer = ({ listing, isLike = false }) => (
-  <div className="grid grid-cols-5 gap-x-12 gap-y-5">
+  <div className="grid grid-cols-5 gap-x-10 gap-y-5">
     {listing.map((item) => (
-      <ListItems key={item.id} data={item} fav={isLike ? true : false} />
+      <ListItems key={item.id} data={item.room} fav={isLike ? true : false} />
     ))}
   </div>
 );

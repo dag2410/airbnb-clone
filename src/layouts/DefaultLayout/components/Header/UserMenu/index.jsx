@@ -12,7 +12,7 @@ import { Heart, LogOut, MessageCircle, Settings } from "lucide-react";
 import { useState } from "react";
 import { FaGlobe, FaRegQuestionCircle, FaUser } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import LangDialog from "./LangDialog";
 
@@ -23,6 +23,9 @@ const UserMenu = () => {
   const [step, setStep] = useState("login");
   const currentUser = useUser();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page") || 1;
+  const limit = searchParams.get("limit") || 10;
 
   const handleOpen = (type) => {
     setStep(type);
@@ -34,7 +37,7 @@ const UserMenu = () => {
         {
           icon: <Heart />,
           title: "Danh sách yêu thích",
-          handler: () => navigate("/wishlists"),
+          handler: () => navigate(`/wishlists?page=${page}&limit=${limit}`),
         },
         {
           icon: <MessageCircle />,

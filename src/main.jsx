@@ -10,7 +10,21 @@ import { LoadingProvider } from "./context/LoadingContext.jsx";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./components/ThemeProvider/index.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 5,
+      retry: 1,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+      refetchOnMount: false,
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <LoadingProvider>
