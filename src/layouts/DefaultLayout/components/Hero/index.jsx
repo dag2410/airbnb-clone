@@ -1,9 +1,11 @@
 // import AnimatedText from "@/components/AnimatedText";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const HeroSection = ({ title, subTitle, heroImage }) => {
+  const { pathname } = useLocation();
+
   return (
     <section className="relative w-full h-screen mt-28 overflow-hidden ">
       <div className="mx-auto">
@@ -34,7 +36,7 @@ const HeroSection = ({ title, subTitle, heroImage }) => {
           {[
             {
               title: "Khám phá ngay",
-              link: "/",
+              link: `${pathname}`,
               onClick: () =>
                 document
                   .getElementById("listing-section")

@@ -1,11 +1,11 @@
-import Header from "@/layouts/DefaultLayout/components/Header";
-import { Outlet, useLocation } from "react-router-dom";
-import Footer from "./components/Footer";
-import HeroSection from "./components/Hero";
-import HeroImage from "@/assets/images/hero-image.webp";
 import HeroImageExperiences from "@/assets/images/hero-image-experiences.webp";
 import HeroImageService from "@/assets/images/hero-image-service.webp";
+import HeroImage from "@/assets/images/hero-image.webp";
+import Header from "@/layouts/DefaultLayout/components/Header";
+import { Outlet, useLocation } from "react-router-dom";
 import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
+import HeroSection from "./components/Hero";
 
 function DefaultLayout() {
   const location = useLocation();

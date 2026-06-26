@@ -1,13 +1,12 @@
-import React, { useState } from "react";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerDescription,
-  DrawerClose,
 } from "@/components/ui/drawer";
 import { X } from "lucide-react";
+import { useState } from "react";
 
 const ImageGallery = ({ mainPhoto, subPhotos }) => {
   const [open, setOpen] = useState(false);
@@ -40,8 +39,8 @@ const ImageGallery = ({ mainPhoto, subPhotos }) => {
                 index === 1
                   ? "rounded-tr-2xl"
                   : index == 3
-                  ? "rounded-br-2xl"
-                  : ""
+                    ? "rounded-br-2xl"
+                    : ""
               }`}
             />
           ))}

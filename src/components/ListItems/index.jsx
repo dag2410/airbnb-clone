@@ -66,11 +66,13 @@ const ListItems = ({ data, fav = false }) => {
             `}
           />
         </button>
-        <div className="absolute inline-flex top-4 left-4 rounded-2xl bg-gray-100 opacity-80 px-3 py-1 cursor-pointer shadow-lg outline outline-white">
-          <span className="w-24 text-xs font-semibold">
-            Được khách yêu thích
-          </span>
-        </div>
+        {data.rating > Number(4.5) && (
+          <div className="absolute inline-flex top-4 left-4 rounded-2xl bg-gray-100 opacity-80 px-3 py-1 cursor-pointer shadow-lg outline outline-white">
+            <span className="w-24 text-xs font-semibold">
+              Được khách yêu thích
+            </span>
+          </div>
+        )}
       </NavLink>
     </div>
   );

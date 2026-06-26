@@ -1,52 +1,49 @@
 import Chatbot from "@/components/Chatbot";
 import ListContainer from "@/components/ListContainer";
 import Loading from "@/components/Loading";
-import roomService from "@/service/roomService";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { toast } from "sonner";
+import { useRooms } from "@/queries/room.query";
 
 function Home() {
-  const location = useLocation();
-
-  // Hiển thị thông báo khi đăng nhập bằng Google thành công dựa vào state được truyền từ oAuthSuccess
-  useEffect(() => {
-    if (location.state?.from === "oauth-success") {
-      toast.success("Đăng nhập bằng Google thành công!");
-    }
-  }, [location.state]);
-
-  const { data: roomList, isLoading } = useQuery({
-    queryFn: roomService.getAllRooms,
-    queryKey: ["rooms"],
-  });
+  const { data: roomList, isPending } = useRooms();
+  console.log(roomList);
 
   return (
     <>
-      {isLoading ? (
+      {isPending ? (
         <div className="h-screen flex items-center justify-center">
           <Loading />
         </div>
       ) : (
         <div>
           <div className="mt-10 flex flex-col gap-10">
-            <ListContainer
-              title={"Nơi lưu trú được ưa chuộng tại Hồ Chí Minh"}
-              listing={roomList?.rows}
-            />{" "}
-            <ListContainer
-              title={"Nơi lưu trú được ưa chuộng tại Hồ Chí Minh"}
-              listing={roomList?.rows}
-            />{" "}
-            <ListContainer
-              title={"Nơi lưu trú được ưa chuộng tại Hồ Chí Minh"}
-              listing={roomList?.rows}
-            />{" "}
-            <ListContainer
-              title={"Nơi lưu trú được ưa chuộng tại Hồ Chí Minh"}
-              listing={roomList?.rows}
-            />
+            {[
+              {
+                title: "Nơi lưu trú mới nhất của hệ thống",
+                data: roomList?.latestRooms,
+              },
+              {
+                title: "Top phòng được đánh giá cao của chúng tôi",
+                data: roomList?.topRatedRooms,
+              },
+              {
+                title: "Không gian lưu trú được yêu thích tại Hà Nội",
+                data: roomList?.hanoiRooms,
+              },
+              {
+                title: "Khám phá vẻ đẹp yên bình tại Ninh Bình",
+                data: roomList?.ninhbinhRooms,
+              },
+              {
+                title: "Phòng nghỉ giá tốt, tiết kiệm cho chuyến đi",
+                data: roomList?.budgetRooms,
+              },
+            ].map((item, index) => (
+              <ListContainer
+                key={index}
+                title={item.title}
+                listing={item.data}
+              />
+            ))}
             <Chatbot />
           </div>
         </div>

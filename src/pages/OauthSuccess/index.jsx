@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { getCurrentUser } from "@/features/auth/authAsync";
 import { useNavigate } from "react-router-dom";
 import Loading from "@/components/Loading";
+import { toast } from "sonner";
 
 export default function OAuthSuccess() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function OAuthSuccess() {
   useEffect(() => {
     const handle = async () => {
       await dispatch(getCurrentUser());
+      toast.success("Đăng nhập Google thành công!");
       navigate("/", {
         state: { from: "oauth-success" },
       });

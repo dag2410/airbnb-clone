@@ -16,8 +16,8 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
 
   const handleNext = () => {
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
-  };.0
-     
+  };
+  0.0;
 
   useEffect(() => {
     if (itemRef.current) {
@@ -29,7 +29,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
     <div>
       <div className={`px-16`}>
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold mb-4 font-montserrat">
+          <h2 className="text-2xl font-semibold mb-3 font-montserrat">
             {title}
           </h2>
           {showArrows && (
