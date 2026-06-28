@@ -15,8 +15,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import LangDialog from "./LangDialog";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UserMenu = () => {
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLangDialogOpen, setIsLangDialogOpen] = useState(false);
@@ -66,6 +68,7 @@ const UserMenu = () => {
           handler: async () => {
             await dispatch(postLogOut()).unwrap();
             toast.success("Đăng xuất thành công");
+            queryClient.invalidateQueries();
           },
         },
       ]

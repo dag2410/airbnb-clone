@@ -1,10 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import GridContainer from "@/components/GridContainer/GridContainer";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
-import wishlistService from "@/service/wishlistService";
+import {
+  useClearWishlistMutation,
+  useWishlist,
+} from "@/queries/wishlist.query";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import DeleteDialog from "./component/DeleteDialog";
 
 function Wishlists() {
@@ -14,14 +16,15 @@ function Wishlists() {
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || 10;
 
-  const { data: roomList, isFetching } = useQuery({
-    queryKey: ["wishlists", page, limit],
-    queryFn: () => wishlistService.getWishlist(page, limit),
-  });
+  const { data: roomList, isFetching } = useWishlist(page, limit);
+  const { mutate: clearWishlist, isPending } = useClearWishlistMutation();
 
   const handleDeleteAll = () => {
-    console.log("Đã xoá toàn bộ danh sách yêu thích!");
-    setIsDialogOpen(false);
+    clearWishlist(undefined, {
+      onSuccess: () => {
+        setIsDialogOpen(false);
+      },
+    });
   };
 
   const changePage = (newPage) => {
@@ -31,9 +34,9 @@ function Wishlists() {
     });
   };
 
-  if (!roomList) return <p>Không có dữ liệu</p>;
-
-  const { rows, pagination } = roomList;
+  const rows = roomList?.rows ?? [];
+  const pagination = roomList?.pagination ?? { totalPage: 0 };
+  console.log(roomList);
 
   return !isFetching ? (
     <div className="mt-30 p-10">
@@ -42,17 +45,30 @@ function Wishlists() {
           Danh sách phòng yêu thích
         </h2>
 
-        <Button
-          variant="ghost"
-          className="font-montserrat font-semibold bg-gray-50 hover:bg-gray-200"
-          onClick={() => setIsDialogOpen(true)}
-        >
-          Xóa danh sách yêu thích
-        </Button>
+        {rows.length > 0 && (
+          <Button
+            variant="ghost"
+            className="font-montserrat font-semibold bg-gray-50 hover:bg-gray-200"
+            onClick={() => setIsDialogOpen(true)}
+          >
+            Xóa danh sách yêu thích
+          </Button>
+        )}
       </div>
 
       <div className="mt-10">
-        <GridContainer listing={rows} isLike />
+        {rows.length > 0 ? (
+          <GridContainer listing={rows} isLike />
+        ) : (
+          <div className="flex h-[400px] items-center justify-center rounded-xl border border-dashed">
+            <div className="text-center">
+              <p className="text-2xl font-semibold">Chưa có dữ liệu</p>
+              <p className="mt-2 text-gray-500">
+                Bạn chưa thêm phòng nào vào danh sách yêu thích.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {pagination.totalPage > 1 && (

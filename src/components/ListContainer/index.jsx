@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ListItems from "../ListItems";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useFavoriteIds } from "@/hooks/useFavoriteIds";
 
 const ListContainer = ({ title, listing, showArrows = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,6 +10,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
 
   const itemsPerView = 7;
   const maxIndex = Math.max(0, listing?.length - itemsPerView);
+  const favoriteIds = useFavoriteIds();
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1));
@@ -63,7 +65,7 @@ const ListContainer = ({ title, listing, showArrows = true }) => {
             >
               {listing?.map((item) => (
                 <div key={item.id} ref={itemRef}>
-                  <ListItems data={item} />
+                  <ListItems data={item} fav={favoriteIds?.has(item.id)} />
                 </div>
               ))}
             </div>

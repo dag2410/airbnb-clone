@@ -7,11 +7,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useFavoriteIds } from "@/hooks/useFavoriteIds";
 
 function UserListings({ host }) {
   const [visibleCount, setVisibleCount] = useState(8);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isAllVisible = visibleCount >= host.listings.length;
+  const favoriteIds = useFavoriteIds();
 
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + 6);
@@ -42,7 +44,7 @@ function UserListings({ host }) {
       <div className="mt-5 flex justify-between">
         {host.listings.slice(0, 6).map((item) => (
           <div>
-            <ListItems data={item} />
+            <ListItems data={item} fav={favoriteIds?.has(item.id)} />
           </div>
         ))}
       </div>
